@@ -28,12 +28,21 @@ double fun9(double x);
 
 double fun10(double x);
 
+double fun11(double x);
+
+double fun12(double x);
+
+double fun13(double x);
+
+double fun14(double x);
+
+double fun15(double x);
+
 int lab3_main() {
     int i = 0;
-    int n = 10;
+    int n = 10000;
     double x, y;
-    double s1, s2, s3, s4, s5;
-    double eps = 0.0001;
+    double eps = 0.000001;
     double s = 0;
 
     cout << '\n' << "Enter the coordinates of the point (x, y): ";
@@ -67,30 +76,31 @@ int lab3_main() {
     }
 
     cout.precision(4);
+    double intersect1 = -1 - (sqrt(3) / 2.0);
+    double intersect2 = -0.5;
     switch (i) {
         case 1:
-            cout << "Formula: S1 = " << (s1 = 2 - M_PI / 4) << endl;
-            cout << "Integral S1 = " << (s1 = integrall(1, 2, n, eps, fun4, s) - integrall(1, 2, n, eps, fun2, s)) <<
+            cout << "Formula: S1 = " << 2 - M_PI / 4 << endl;
+            cout << "Integral S1 = " << integrall(-2, -1, n, eps, fun2, s) - (integrall(-1, 0, n, eps, fun1, s)) <<
                     endl;
             break;
         case 2:
-            cout << "Formula: S2 = " << (s2 = 4 - M_PI) << endl;
-            cout << "Integral S2 = " << (s2 = integrall(-1, 1, n, eps, fun7, s) - integrall(-1, 1, n, eps, fun2, s)) <<
-                    endl;
+            cout << "Formula: S2 = " << 4 - M_PI << endl;
+            cout << "Integral S2 = " << integrall(-1, 0, n, eps, fun3, s) + integrall(0, 1, n, eps, fun4, s) +
+                    integrall(-1, 0, n, eps, fun5, s) + integrall(0, 1, n, eps, fun6, s) << endl;
             break;
         case 3:
-            cout << "Formula: S3 = " << (s3 = 2 - M_PI / 2) << endl;
-            cout << "Integral S3 = " << (s3 = integrall(1, 2, n, eps, fun3, s)) << endl;
+            cout << "Formula: S3 = " << 2 - M_PI / 2 << endl;
+            cout << "Integral S3 = " << integrall(1, 2, n, eps, fun7, s) + integrall(1, 2, n, eps, fun6, s) << endl;
             break;
         case 4:
-            cout << "Formula: S4 = " << (s4 = M_PI / 4 + 2 * (M_PI / 2 - 2 * (M_PI / 3 - sqrt(3) / 4))) << endl;
-            cout << "Integral S4 = " << (s4 = fabs(integrall(-1, 0, n, eps, fun1, s)) - fabs(
-                                                  integrall(-1, 0, n, eps, fun3, s))) << endl;
+            cout << "Formula: S4 = " << M_PI / 4 + 2 * integrall(-1, intersect2, n, eps, fun14, s) << endl;
+            cout << "Integral S4 = " << integrall(-2, intersect1, n, eps, fun10, s)
+                    + integrall(intersect1, -1, n, eps, fun11, s) + integrall(-1, intersect2, n, eps, fun14, s) << endl;
             break;
         case 5:
-            cout << "Formula: S5 = " << (s5 = 1 - M_PI / 4) << endl;
-            cout << "Integral S5 = " << (s5 = fabs(integrall(-1, 0, n, eps, fun8, s)) - fabs(
-                                                  integrall(-1, 0, n, eps, fun5, s))) << endl;
+            cout << "Formula: S5 = " << 1 - M_PI / 4 << endl;
+            cout << "Integral S5 = " << endl;
             break;
     }
 
@@ -111,42 +121,63 @@ double integrall(double a, double b, int n, double eps, Tfun fun, double s1) {
     return s;
 }
 
+//M1
 double fun1(double x) {
-    return sqrt(1 - x * x); //x^2 + y^2 = 1
+    return sqrt(1 - x * x);
 }
 
 double fun2(double x) {
-    return sqrt(2 * x - x * x); //(x - 1)^2 + y^2 = 1
+    return 2;
 }
 
+//M2
 double fun3(double x) {
-    return sqrt(-2 * x - x * x); //(x + 1)^2 + y^2 = 1
+    return 1 - sqrt(1 - (x + 1) * (x + 1));
 }
 
 double fun4(double x) {
-    return 2; //y = 2
+    return 1 - sqrt(1 - (x - 1) * (x - 1));
 }
 
 double fun5(double x) {
-    return -1 - sqrt(1 - x * x); //x^2 + (y + 1)^2 = 1
+    return abs(-1 + sqrt(1 - (x + 1) * (x + 1)));
 }
 
 double fun6(double x) {
-    return sqrt(1 - x * x) - 1; //x^2 + (y + 1)^2 = 1
+    return abs(-1 + sqrt(1 - (x - 1) * (x - 1)));
 }
 
+//M3
 double fun7(double x) {
-    return 1; //y = 1
+    return 1 - sqrt(1 - (x - 1) * (x - 1));
 }
+
+//M4
 
 double fun8(double x) {
-    return -2; //y = -2
+    return -1 + sqrt(1 - (x + 1) * (x + 1));
 }
 
 double fun9(double x) {
-    return -sqrt(1 - x * x); //x^2 + y^2 = 1
+    return -1 - sqrt(1 - (x + 1) * (x + 1));
 }
 
 double fun10(double x) {
-    return -sqrt(2 * x - x * x); //(x - 1)^2 + y^2 = 1
+    return abs(fun9(x) - fun8(x));
+}
+
+double fun11(double x) {
+    return abs(fun9(x) - fun12(x));
+}
+
+double fun12(double x) {
+    return -sqrt(1 - (x + 1) * (x + 1));
+}
+
+double fun13(double x) {
+    return -1 - sqrt(1 - x * x);
+}
+
+double fun14(double x) {
+    return abs(fun9(x) - fun13(x));
 }
