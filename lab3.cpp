@@ -8,6 +8,8 @@ typedef double (*Tfun)(double);
 
 double integrall(double, double, int, double, Tfun, double);
 
+double fun0(double x);
+
 double fun1(double x);
 
 double fun2(double x);
@@ -37,6 +39,16 @@ double fun13(double x);
 double fun14(double x);
 
 double fun15(double x);
+
+double fun16(double x);
+
+double fun17(double x);
+
+double fun18(double x);
+
+double fun19(double x);
+
+double fun20(double x);
 
 int lab3_main() {
     int i = 0;
@@ -76,13 +88,13 @@ int lab3_main() {
     }
 
     cout.precision(4);
-    double intersect1 = -1 - (sqrt(3) / 2.0);
+    double intersect1 = -1 - sqrt(3) / 2.0;
     double intersect2 = -0.5;
+    double intersect3 = 0.5;
     switch (i) {
         case 1:
             cout << "Formula: S1 = " << 2 - M_PI / 4 << endl;
-            cout << "Integral S1 = " << integrall(-2, -1, n, eps, fun2, s) - (integrall(-1, 0, n, eps, fun1, s)) <<
-                    endl;
+            cout << "Integral S1 = " << integrall(-2, -1, n, eps, fun2, s) + integrall(-1, 0, n, eps, fun0, s) << endl;
             break;
         case 2:
             cout << "Formula: S2 = " << 4 - M_PI << endl;
@@ -94,13 +106,14 @@ int lab3_main() {
             cout << "Integral S3 = " << integrall(1, 2, n, eps, fun7, s) + integrall(1, 2, n, eps, fun6, s) << endl;
             break;
         case 4:
-            cout << "Formula: S4 = " << M_PI / 4 + 2 * integrall(-1, intersect2, n, eps, fun14, s) << endl;
+            cout << "Formula: S4 = " << M_PI / 4 + 2 * (M_PI / 4 - (2 * M_PI / 3 - sqrt(3) / 2) / 2) << endl;
             cout << "Integral S4 = " << integrall(-2, intersect1, n, eps, fun10, s)
                     + integrall(intersect1, -1, n, eps, fun11, s) + integrall(-1, intersect2, n, eps, fun14, s) << endl;
             break;
         case 5:
-            cout << "Formula: S5 = " << 1 - M_PI / 4 << endl;
-            cout << "Integral S5 = " << endl;
+            cout << "Formula: S5 = " << 1 - (1 - M_PI / 4) - (sqrt(3) / 2 + M_PI / 3 - M_PI / 4 - 1) << endl;
+            cout << "Integral S5 = " << integrall(0, intersect3, n, eps, fun19, s) + integrall(
+                intersect3, 1, n, eps, fun20, s) << endl;
             break;
     }
 
@@ -122,12 +135,24 @@ double integrall(double a, double b, int n, double eps, Tfun fun, double s1) {
 }
 
 //M1
+double funConst1(double x) {
+    return 1;
+}
+
+double funConst2(double x) {
+    return 2;
+}
+
+double fun0(double x) {
+    return funConst2(x) - fun1(x);
+}
+
 double fun1(double x) {
-    return sqrt(1 - x * x);
+    return funConst1(x) + sqrt(1 - x * x);
 }
 
 double fun2(double x) {
-    return 2;
+    return funConst2(x) - funConst1(x);
 }
 
 //M2
@@ -180,4 +205,29 @@ double fun13(double x) {
 
 double fun14(double x) {
     return abs(fun9(x) - fun13(x));
+}
+
+//M5
+double fun15(double x) {
+    return -1 - sqrt(1 - (x - 1) * (x - 1));
+}
+
+double fun16(double x) {
+    return -1 - sqrt(1 - x * x);
+}
+
+double fun17(double x) {
+    return -sqrt(1 - x * x);
+}
+
+double fun18(double x) {
+    return -sqrt(1 - (x - 1) * (x - 1));
+}
+
+double fun19(double x) {
+    return abs(fun15(x) - fun17(x));
+}
+
+double fun20(double x) {
+    return abs(fun16(x) - fun18(x));
 }
