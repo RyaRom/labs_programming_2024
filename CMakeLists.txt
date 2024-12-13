@@ -18,4 +18,7 @@ add_executable(cpp
         Lab6.h
         lab2.cpp
         lab3.cpp
+        lab7.cpp
+        Deque.h
+        Deque.cpp
 )
