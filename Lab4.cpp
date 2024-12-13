@@ -16,12 +16,7 @@ void Lab4::main() {
         cout << "File not found: " << FNAME_R << endl;
         return;
     }
-    string input = readFile(FNAME_R);
-    cout << "Input: " << input << endl;
-
-    writeInFile(FNAME_W, modifyString(input, "\\d+"));
-
-    cout << "Result: " << readFile(FNAME_W) << endl;
+    processFile(FNAME_R, "\\d+");
 }
 
 string Lab4::modifyString(string &input, const string &regex) {
@@ -50,17 +45,21 @@ void Lab4::createFile(const std::string &file_name) {
     outFileW.close();
 }
 
-string Lab4::readFile(const string &file_name) {
+void Lab4::processFile(const string &file_name, const string &regex) {
     ifstream inFileR(file_name, ios::in);
+    if (!inFileR) {
+        throw runtime_error("Failed to open file: " + file_name);
+    }
 
-    stringstream ss;
-    string input;
-    while (getline(inFileR, input)) {
-        ss << input;
+    string line;
+    cout << "result: " << endl;
+    while (getline(inFileR, line)) {
+        string modifiedLine = modifyString(line, regex);
+        cout << modifiedLine << endl;
+        writeInFile(FNAME_W, modifiedLine);
     }
 
     inFileR.close();
-    return ss.str();
 }
 
 void Lab4::writeInFile(const string &file_name, const string &content) {

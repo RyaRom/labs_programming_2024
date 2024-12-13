@@ -18,7 +18,7 @@ private:
 
     static void createFile(const std::string &file_name);
 
-    static std::string readFile(const std::string &file_name);
+    static void processFile(const std::string &file_name, const std::string &regex);
 
     static void writeInFile(const std::string &file_name, const std::string &content);
 };
