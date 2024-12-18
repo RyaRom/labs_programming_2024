@@ -4,8 +4,8 @@
 #include "Lab6.h"
 typedef int t_elem;
 
-int lab7_main();
+int lab3_main();
 
 int main() {
-    lab7_main();
+    lab3_main();
 }

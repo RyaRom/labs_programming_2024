@@ -99,21 +99,22 @@ int lab3_main() {
         case 2:
             cout << "Formula: S2 = " << 4 - M_PI << endl;
             cout << "Integral S2 = " << integrall(-1, 0, n, eps, fun3, s) + integrall(0, 1, n, eps, fun4, s) +
-                    integrall(-1, 0, n, eps, fun5, s) + integrall(0, 1, n, eps, fun6, s) << endl;
+                    fabs(integrall(-1, 0, n, eps, fun5, s)) + fabs(integrall(0, 1, n, eps, fun6, s)) << endl;
             break;
         case 3:
             cout << "Formula: S3 = " << 2 - M_PI / 2 << endl;
-            cout << "Integral S3 = " << integrall(1, 2, n, eps, fun7, s) + integrall(1, 2, n, eps, fun6, s) << endl;
+            cout << "Integral S3 = " << integrall(1, 2, n, eps, fun7, s) + fabs(integrall(1, 2, n, eps, fun6, s)) << endl;
             break;
         case 4:
             cout << "Formula: S4 = " << M_PI / 4 + 2 * (M_PI / 4 - (2 * M_PI / 3 - sqrt(3) / 2) / 2) << endl;
-            cout << "Integral S4 = " << integrall(-2, intersect1, n, eps, fun10, s)
-                    + integrall(intersect1, -1, n, eps, fun11, s) + integrall(-1, intersect2, n, eps, fun14, s) << endl;
+            cout << "Integral S4 = " << fabs(integrall(-2, intersect1, n, eps, fun10, s))
+                    + fabs(integrall(intersect1, -1, n, eps, fun11, s)) + fabs(
+                        integrall(-1, intersect2, n, eps, fun14, s)) << endl;
             break;
         case 5:
             cout << "Formula: S5 = " << 1 - (1 - M_PI / 4) - (sqrt(3) / 2 + M_PI / 3 - M_PI / 4 - 1) << endl;
-            cout << "Integral S5 = " << integrall(0, intersect3, n, eps, fun19, s) + integrall(
-                intersect3, 1, n, eps, fun20, s) << endl;
+            cout << "Integral S5 = " << fabs(integrall(0, intersect3, n, eps, fun19, s)) + fabs(integrall(
+                intersect3, 1, n, eps, fun20, s)) << endl;
             break;
     }
 
@@ -165,11 +166,11 @@ double fun4(double x) {
 }
 
 double fun5(double x) {
-    return abs(-1 + sqrt(1 - (x + 1) * (x + 1)));
+    return -1 + sqrt(1 - (x + 1) * (x + 1));
 }
 
 double fun6(double x) {
-    return abs(-1 + sqrt(1 - (x - 1) * (x - 1)));
+    return -1 + sqrt(1 - (x - 1) * (x - 1));
 }
 
 //M3
@@ -188,11 +189,11 @@ double fun9(double x) {
 }
 
 double fun10(double x) {
-    return abs(fun9(x) - fun8(x));
+    return fun9(x) - fun8(x);
 }
 
 double fun11(double x) {
-    return abs(fun9(x) - fun12(x));
+    return fun9(x) - fun12(x);
 }
 
 double fun12(double x) {
@@ -204,7 +205,7 @@ double fun13(double x) {
 }
 
 double fun14(double x) {
-    return abs(fun9(x) - fun13(x));
+    return fun9(x) - fun13(x);
 }
 
 //M5
@@ -225,9 +226,9 @@ double fun18(double x) {
 }
 
 double fun19(double x) {
-    return abs(fun15(x) - fun17(x));
+    return fun15(x) - fun17(x);
 }
 
 double fun20(double x) {
-    return abs(fun16(x) - fun18(x));
+    return fun16(x) - fun18(x);
 }
